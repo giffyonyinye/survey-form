@@ -2,7 +2,12 @@
 "use client";
 import { useState } from "react";
 
+import { Resend } from 'resend';
+
+const resend = new Resend("test123");
+
 export default function Home() {
+  const [status, setStatus] = useState('');
   const [formData, setFormData] = useState({
     ageGroup: "",
     gender: "",
@@ -42,14 +47,52 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const sendEmail =  async (req, res) => {
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',
+      to: ['delivered@resend.dev'],
+      subject: 'Hello world',
+      // react: EmailTemplate({ firstName: 'John' }),
+      data: formData
+    });
+  
+    if (error) {
+      return res.status(400).json(error);
+    }
+  
+    res.status(200).json(data);
+  };
+  
+
+  const handleSubmit =  async (e) => {
     e.preventDefault();
     // Handle form submission (e.g., send to an API)
     console.log(formData);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log(response)
+
+      if (response.ok) {
+        setStatus('Email sent successfully!');
+      } else {
+        setStatus('Failed to send email.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setStatus('Error occurred while sending email.');
+    }
   };
 
   return (
     <div className=" bg-gray-200 ">
+      {status}
       <div className="flex justify-center items-center">
         <form
           onSubmit={handleSubmit}
