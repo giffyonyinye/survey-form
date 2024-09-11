@@ -2,36 +2,34 @@
 "use client";
 import { useState } from "react";
 
-import { Resend } from 'resend';
+import { Resend } from "resend";
 
 const resend = new Resend("test123");
 
-export default function SurveyForm() {
-  const [status, setStatus] = useState('');
+export default function StaffForm() {
+  const [status, setStatus] = useState("");
   const [formData, setFormData] = useState({
-    ageGroup: "",
-    gender: "",
-    anonymous: [],
+    job: [],
     duration: [],
-    quality: [],
-    other: "",
-    respected: "",
-    arrivalTime: "",
-    satisfied: "",
-    communicate: "",
-    informed: "",
-    comfortable: "",
-    competence: "",
-    trained: "",
-    treated: "",
-    service: "",
-    recommend: "",
-    supportPlan: "",
-    safe: "",
-    ppe: "",
-    consent: "",
-    improved: "",
+    improvements: "",
     comments: "",
+    enjoy: "",
+    mentalHealth: "",
+    healthImpact: "",
+    balance: "",
+    concerns: "",
+    performance: "",
+    supported: "",
+    advancement: "",
+    communication: "",
+    training: "",
+    time: "",
+    quality: "",
+    safe: "",
+    autonomy: "",
+    valued: "",
+    satisfied: "",
+    hours: "",
   });
 
   const handleChange = (e) => {
@@ -47,131 +45,121 @@ export default function SurveyForm() {
     }
   };
 
-  
-
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // Handle form submission (e.g., send to an API)
+    console.log(formData);
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
+      const response = await fetch("/api/staff-email", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        alert('Email sent successfully!');
+        alert("Email sent successfully!");
       } else {
-        setStatus('Failed to send email.');
+        setStatus("Failed to send email.");
       }
     } catch (error) {
-      console.error('Error:', error);
-      setStatus('Error occurred while sending email.');
+      console.error("Error:", error);
+      setStatus("Error occurred while sending email.");
     }
   };
 
   return (
     <div className=" bg-gray-200 ">
-      {status}
       <div className="flex justify-center items-center">
         <form
           onSubmit={handleSubmit}
           className="bg-white p-6 mt-5 rounded-lg shadow-lg max-w-2xl w-full"
         >
-          <h1 className="font-bold">CLIENT SURVEY FORM</h1>
+          <h1 className="font-bold">STAFF SURVEY FORM</h1>
           <p>
             {" "}
-            This survey has been shared with you to help us analyse and improve
-            the quality of care we provide. You do not have to declare your
-            Identity if you choose not to, as this can be returned anonymously
+            Please answer ALL questions as honestly as possible. Your responses
+            will be kept confidential and used to improve the work environment
+            and support provided to staff. The questionnaire is designed to
+            gather comprehensive feedback from staff. It focuses on areas
+            critical to your job satisfaction and well-being.
           </p>
-          {/* Age Group */}
-          <div className="mb-4 mt-6">
+          <h2>
+            Thank you for taking your time to participate in this important
+            exercise!
+          </h2>
+          <div className="mb-4 mt-10">
             <label className="block text-sm font-medium text-gray-700">
-              What is your age group? *
-            </label>
-            <select
-              name="ageGroup"
-              value={formData.ageGroup}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="18-25">18-25</option>
-              <option value="26-35">26-35</option>
-              <option value="36-45">36-45</option>
-              <option value="45+">45+</option>
-            </select>
-          </div>
-
-          {/* Gender */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Your gender? *
-            </label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          {/* Anonymous */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Do you want to remain anonymous? *
+              Job Title *
             </label>
             <div className="mt-2">
               <label className="inline-flex items-center">
                 <input
                   type="checkbox"
-                  name="anonymous"
-                  value="Yes"
-                  checked={formData.anonymous.includes("Yes")}
+                  name="job"
+                  value="Care Worker"
+                  checked={formData.job.includes("Care Worker")}
                   onChange={handleChange}
                   className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
                 />
-                <span className="ml-2">Yes</span>
-              </label>
-              <label className="inline-flex items-center ml-4">
+                <span className="ml-2">Care Worker</span>
+              </label>{" "}
+              <br />
+              <label className="inline-flex items-center">
                 <input
                   type="checkbox"
-                  name="anonymous"
-                  value="No"
-                  checked={formData.anonymous.includes("No")}
+                  name="job"
+                  value="Senior Care Worker"
+                  checked={formData.job.includes("Senior Care Worker")}
                   onChange={handleChange}
                   className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
                 />
-                <span className="ml-2">No</span>
+                <span className="ml-2">Senior Care Worker</span>
+              </label>{" "}
+              <br />
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="job"
+                  value="Team Leader"
+                  checked={formData.job.includes("Team Leader")}
+                  onChange={handleChange}
+                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                />
+                <span className="ml-2">Team Leader</span>
+              </label>{" "}
+              <br />
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="job"
+                  value="Other"
+                  checked={formData.job.includes("Other")}
+                  onChange={handleChange}
+                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                />
+                <span className="ml-2">Other</span>
+              </label> <br/>
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="job"
+                  value="I choose to remain anonymous"
+                  checked={formData.job.includes(
+                    "I choose to remain anonymous"
+                  )}
+                  onChange={handleChange}
+                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                />
+                <span className="ml-2">I choose to remain anonymous</span>
               </label>
             </div>
-            {formData.anonymous.includes("No") && (
-              <div className="mt-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Please provide your full name:
-                </label>
-                <input
-                  type="text"
-                  name="other"
-                  value={formData.other}
-                  onChange={handleChange}
-                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            )}
           </div>
 
-          {/* Duration of care */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Duration of care *
+              Length of Employment*
             </label>
             <div className="mt-2">
               <label className="inline-flex items-center">
@@ -224,102 +212,26 @@ export default function SurveyForm() {
             </div>
           </div>
 
-          {/* quality of care */}
-          <div className="mb-4">
+          {/* Age Group */}
+          <div className="mb-4 mt-6">
             <label className="block text-sm font-medium text-gray-700">
-              How would you rate the quality of care you receive? *
-            </label>
-            <div className="mt-2">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="quality"
-                  value="Excellent"
-                  checked={formData.quality.includes("Excellent")}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                />
-                <span className="ml-2">Excellent</span>
-              </label>{" "}
-              <br />
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="quality"
-                  value="Good"
-                  checked={formData.quality.includes("Good")}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                />
-                <span className="ml-2">Good</span>
-              </label>{" "}
-              <br />
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="quality"
-                  value="Satisfactory"
-                  checked={formData.quality.includes("Satisfactory")}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                />
-                <span className="ml-2">Satisfactory</span>
-              </label>{" "}
-              <br />
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="quality"
-                  value="Poor"
-                  checked={formData.quality.includes("Poor")}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                />
-                <span className="ml-2">Poor</span>
-              </label>
-            </div>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Do the care workers arrive on time for your scheduled visit? *
+              Contracted Hours of employment *
             </label>
             <select
-              name="arrivalTime"
-              value={formData.arrivalTime}
+              name="hours"
+              value={formData.hours}
               onChange={handleChange}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="">Choose</option>
-              <option value="Always">Always</option>
-              <option value="Usually">Usually</option>
-              <option value="Sometimes">Sometimes</option>
-              <option value="Rarely">Rarely</option>
+              <option value="39hrs">39hrs</option>
+              <option value="36hrs">36hrs</option>
             </select>
           </div>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Do the care workers arrive on time for your scheduled visit? *
-            </label>
-            <select
-              name="respected"
-              value={formData.respected}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Always">Always</option>
-              <option value="Most of the time">Most of the time</option>
-              <option value="Sometimes">Sometimes</option>
-              <option value="Rarely">Rarely</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              How satisfied are you with the level of personal care provided,
-              (e.g., bathing, dressing, etc?)
+              How satisfied are you with your current workload? *
             </label>
             <select
               name="satisfied"
@@ -338,121 +250,31 @@ export default function SurveyForm() {
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              How well do care workers communicate with you? *
+              Do you feel that your work is valued by the organisation? *
             </label>
             <select
-              name="communicate"
-              value={formData.communicate}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Excellent">Excellent</option>
-              <option value="Good">Good</option>
-              <option value="Satisfactory">Satisfactory</option>
-              <option value="Poor">Poor</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Are you informed in advance if there is a change in your care
-              schedule? *
-            </label>
-            <select
-              name="informed"
-              value={formData.informed}
+              name="valued"
+              value={formData.valued}
               onChange={handleChange}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="">Choose</option>
               <option value="Always">Always</option>
-              <option value="Most of the time">Most of the time</option>
+              <option value="Often">Often</option>
               <option value="Sometimes">Sometimes</option>
               <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
             </select>
           </div>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Do you feel comfortable discussing any concerns or issues with
-              your care workers?
+              How satisfied are you with the level of autonomy you have in your
+              role? *
             </label>
             <select
-              name="comfortable"
-              value={formData.comfortable}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Always">Always</option>
-              <option value="Most of the time">Most of the time</option>
-              <option value="Sometimes">Sometimes</option>
-              <option value="Rarely">Rarely</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              How would you rate the competence of the care workers?*
-            </label>
-            <select
-              name="competence"
-              value={formData.competence}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Excellent">Excellent</option>
-              <option value="Good">Good</option>
-              <option value="Satisfactory">Satisfactory</option>
-              <option value="Poor">Poor</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Do you feel that the care workers are well-trained and
-              knowledgeable? *
-            </label>
-            <select
-              name="trained"
-              value={formData.trained}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="Unsure">Unsure</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Do care workers treat you with dignity and respect? *
-            </label>
-            <select
-              name="treated"
-              value={formData.treated}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Always">Always</option>
-              <option value="Most of the time">Most of the time</option>
-              <option value="Sometimes">Sometimes</option>
-              <option value="Rarely">Rarely</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Overall, how satisfied are you with the service you receive? *
-            </label>
-            <select
-              name="service"
-              value={formData.service}
+              name="autonomy"
+              value={formData.autonomy}
               onChange={handleChange}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
@@ -467,42 +289,7 @@ export default function SurveyForm() {
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Would you recommend our service to others? *
-            </label>
-            <select
-              name="recommend"
-              value={formData.recommend}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="Unsure">Maybe</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Do you feel your support plan is tailored to meet your specific
-              needs?*
-            </label>
-            <select
-              name="supportPlan"
-              value={formData.supportPlan}
-              onChange={handleChange}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option value="">Choose</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="Unsure">Maybe</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Do you feel safe and secure while receiving care in your home? *
+              Do you feel safe in your wok environment? *
             </label>
             <select
               name="safe"
@@ -512,58 +299,243 @@ export default function SurveyForm() {
             >
               <option value="">Choose</option>
               <option value="Always">Always</option>
-              <option value="Most of the time">Most of the time</option>
+              <option value="Often">Often</option>
               <option value="Sometimes">Sometimes</option>
               <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
             </select>
           </div>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Do the care workers use appropriate Personal Protective Equipment
-              (PPE) during visits?
+              How would you rate the quality of the equipment and materials
+              provided for your work?
             </label>
             <select
-              name="ppe"
-              value={formData.ppe}
+              name="quality"
+              value={formData.quality}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Excellent">Excellent</option>
+              <option value="Good">Good</option>
+              <option value="Fair">Fair</option>
+              <option value="Good">Good</option>
+              <option value="Poor">Poor</option>
+              <option value="Very Poor">Very Poor</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Do you think you have enough time to complete your tasks during
+              Client's visits?
+            </label>
+            <select
+              name="time"
+              value={formData.time}
               onChange={handleChange}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="">Choose</option>
               <option value="Always">Always</option>
-              <option value="Most of the time">Most of the time</option>
+              <option value="Often">Often</option>
               <option value="Sometimes">Sometimes</option>
               <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
             </select>
           </div>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Do you feel that your consent is sought before any care procedures
-              are carried out?
+              Do you feel that you have received adequate training in your role?
+              *
             </label>
             <select
-              name="consent"
-              value={formData.consent}
+              name="training"
+              value={formData.training}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Yes, and it was adequate">
+                Yes, and it was adequate
+              </option>
+              <option value="Yes, but not adequate">
+                Yes, but not adequate
+              </option>
+              <option value="No, I am yet to receive">
+                No, I am yet to receive
+              </option>
+              <option value="No, I have not received">
+                No, I have not received
+              </option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              How would you rate the communication between you and your
+              supervisors? *
+            </label>
+            <select
+              name="communication"
+              value={formData.communication}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Excellent">Excellent</option>
+              <option value="Good">Good</option>
+              <option value="Fair">Fair</option>
+              <option value="Good">Good</option>
+              <option value="Poor">Poor</option>
+              <option value="Very Poor">Very Poor</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Do you feel that there are opportunities for career advancement
+              within the organisation?
+            </label>
+            <select
+              name="advancement"
+              value={formData.advancement}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Maybe">Maybe</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Do you feel supported by your supervisors and management team? *
+            </label>
+            <select
+              name="supported"
+              value={formData.supported}
               onChange={handleChange}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="">Choose</option>
               <option value="Always">Always</option>
-              <option value="Most of the time">Most of the time</option>
+              <option value="Often">Often</option>
               <option value="Sometimes">Sometimes</option>
               <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
             </select>
           </div>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Are there any areas you feel could be improved?
+              How often do you receive feedback on your performance? *
+            </label>
+            <select
+              name="performance"
+              value={formData.performance}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Regularly">Regularly</option>
+              <option value="Occassionally">Occassionally</option>
+              <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Are your concerns or issues addressed promptly by management? *
+            </label>
+            <select
+              name="concerns"
+              value={formData.concerns}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Always">Always</option>
+              <option value="Often">Often</option>
+              <option value="Sometimes">Sometimes</option>
+              <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              How satisfied are you with your work-life balance? *
+            </label>
+            <select
+              name="balance"
+              value={formData.balance}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Very Satisfied">Very Satisfied</option>
+              <option value="Satisfied">Satisfied</option>
+              <option value="Neutral">Neutral</option>
+              <option value="Dissatisfied">Dissatisfied</option>
+              <option value="Very dissatisfied">Very dissatisfied</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Do you feel that your job negatively impacts your physical health?
+              *
+            </label>
+            <select
+              name="healthImpact"
+              value={formData.healthImpact}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Always">Always</option>
+              <option value="Often">Often</option>
+              <option value="Sometimes">Sometimes</option>
+              <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Do you feel that your job negatively impacts your physical health?
+              *
+            </label>
+            <select
+              name="mentalHealth"
+              value={formData.mentalHealth}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose</option>
+              <option value="Always">Always</option>
+              <option value="Often">Often</option>
+              <option value="Sometimes">Sometimes</option>
+              <option value="Rarely">Rarely</option>
+              <option value="Never">Never</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              What do you enjoy most about your job?
             </label>
             <input
               type="text"
-              name="improved"
-              value={formData.improved}
+              name="enjoy"
+              value={formData.enjoy}
               onChange={handleChange}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
@@ -577,6 +549,20 @@ export default function SurveyForm() {
               type="text"
               name="comments"
               value={formData.comments}
+              onChange={handleChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              What improvement would you suggest for your role or the
+              organisation?
+            </label>
+            <input
+              type="text"
+              name="improvements"
+              value={formData.improvements}
               onChange={handleChange}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />

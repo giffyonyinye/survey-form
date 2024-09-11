@@ -40,7 +40,7 @@ export async function POST(request) {
       to: ['giffyonyinye@gmail.com'],
       subject: "Hello world",
       react: EmailTemplate({ 
-        ageGroup: ageGroup,
+      ageGroup: ageGroup,
       gender: gender,
       anonymous: anonymous,
       duration: duration,

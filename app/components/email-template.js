@@ -71,7 +71,7 @@ const EmailTemplate = ({
         <p>Do the care workers use appropriate Personal Protective Equipment (PPE) during visits?: {ppe }</p>
         <p>Do you feel that your consent is sought before any care procedures are carried out?: {consent }</p>
         <p>Are there any areas you feel could be improved?: {improved }</p>
-        <p>Do you have any additional comments or feedback?: {comments }</p> 
+        <p>Do you have any additional comments or feedback?: {comments }</p> ' +                                                                                                                                                                                                                        '
       </div>
     </div>
   );
